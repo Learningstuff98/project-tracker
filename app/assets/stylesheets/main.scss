@@ -1,1 +1,23 @@
 @import "bootstrap/scss/bootstrap";
+
+body {
+  //background: linear-gradient(to right, rgb(49, 114, 60), #202020, rgb(49, 114, 60));
+  font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+}
+
+.green {
+  color: #00C122;
+}
+
+.cursor:hover {
+  cursor: pointer;
+}
+
+.link {
+  //text-decoration-color: #00C122;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #0d6efd;
+}
