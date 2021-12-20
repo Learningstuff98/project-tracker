@@ -1,8 +1,12 @@
 @import "bootstrap/scss/bootstrap";
 
 body {
-  //background: linear-gradient(to right, rgb(49, 114, 60), #202020, rgb(49, 114, 60));
+  background-color: #0a0f18;
   font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+}
+
+.header-color {
+  background-color:  #101825;
 }
 
 .green {
@@ -11,13 +15,4 @@ body {
 
 .cursor:hover {
   cursor: pointer;
-}
-
-.link {
-  //text-decoration-color: #00C122;
-  text-decoration: none;
-}
-
-.link:hover {
-  color: #0d6efd;
 }

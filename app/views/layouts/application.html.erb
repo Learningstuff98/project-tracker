@@ -13,20 +13,20 @@
 
   <body>
 
-    <nav class="navbar navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-light fixed-top header-color">
       <div class="container-fluid">
 
         <h3><%= link_to "Homepage", root_path, class: "green" %></h3>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <h3 class="green cursor" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+          More Info
+        </h3>
 
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas offcanvas-end header-color" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 
           <div class="offcanvas-header">
             <h4 class="offcanvas-title green" id="offcanvasNavbarLabel">Info</h4>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <h4 type="button" class="green" data-bs-dismiss="offcanvas">Close</h4>
           </div>
 
           <div class="offcanvas-body">

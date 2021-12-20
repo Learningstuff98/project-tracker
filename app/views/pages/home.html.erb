@@ -1,7 +1,7 @@
-<h1>Home Page</h1>
+<h1 class="green">Home Page</h1>
 
 <% if current_user %>
-  <h3><%= "Logged in as #{current_user.username}" %></h3><br/>
+  <h3 class="green"><%= "Logged in as #{current_user.username}" %></h3><br/>
   <h3><%= link_to 'Log out', destroy_user_session_path, method: :delete %></h3>
 <% else %>
   <h3><%= link_to "Log in", new_user_session_path %></h3>
