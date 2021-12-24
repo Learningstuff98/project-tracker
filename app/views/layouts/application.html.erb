@@ -17,6 +17,10 @@
       <div class="header-color header-element">
 
         <h4>
+          <%= link_to "Homepage", root_path, class: "green" %>
+        </h4>
+
+        <h4>
           <%= link_to "Github", href="https://github.com/Learningstuff98/project-tracker", class: "green" %>
         </h4>
 
@@ -39,11 +43,11 @@
       <div class="container-fluid">
 
         <div type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-          <h3>More Info</h3>
+          <h4>More Info</h4>
         </div>
 
         <% if current_user %>
-          <h3><%= "Logged in as #{current_user.username}" %></h3>
+          <h4><%= "Logged in as #{current_user.username}" %></h4>
         <% end %>
 
       </div>
