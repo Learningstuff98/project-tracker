@@ -13,45 +13,39 @@
 
   <body>
 
-    <nav class="navbar navbar-light fixed-top header-color">
+    <div class="collapse" id="navbarToggleExternalContent">
+      <div class="header-color header-element">
+
+        <h4>
+          <%= link_to "Github", href="https://github.com/Learningstuff98/project-tracker", class: "green" %>
+        </h4>
+
+        <h4>
+          <%= link_to "Linkedin", href="https://www.linkedin.com/in/andy-strube-6231ba152", class: "green" %>
+        </h4>
+
+        <h4>
+          <%= link_to "Resume", href="https://docs.google.com/document/d/1qm4nBdIZfsx8zh4IwYvkVuQYclpOXUCVxnC9vV3_eBM/edit", class: "green" %>
+        </h4>
+
+        <h4 class="green">
+          andystrube64@gmail.com
+        </h4>
+
+      </div>
+    </div>
+
+    <nav class="navbar header-color green">
       <div class="container-fluid">
 
-        <h3><%= link_to "Homepage", root_path, class: "green" %></h3>
-
-        <h3 class="green cursor" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-          More Info
-        </h3>
-
-        <div class="offcanvas offcanvas-end header-color" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-
-          <div class="offcanvas-header">
-            <h4 class="offcanvas-title green" id="offcanvasNavbarLabel">Info</h4>
-            <h4 type="button" class="green" data-bs-dismiss="offcanvas">Close</h4>
-          </div>
-
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-
-              <h3>
-                <%= link_to "Github", href="https://github.com/Learningstuff98/project-tracker", class: "green" %>
-              </h3>
-
-              <h3>
-                <%= link_to "Linkedin", href="https://www.linkedin.com/in/andy-strube-6231ba152", class: "green" %>
-              </h3>
-
-              <h3>
-                <%= link_to "Resume", href="https://docs.google.com/document/d/1qm4nBdIZfsx8zh4IwYvkVuQYclpOXUCVxnC9vV3_eBM/edit", class: "green" %>
-              </h3>
-
-              <h3 class="green">
-                andystrube64@gmail.com
-              </h3>
-
-            </ul>
-          </div>
-
+        <div type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <h3>More Info</h3>
         </div>
+
+        <% if current_user %>
+          <h3><%= "Logged in as #{current_user.username}" %></h3>
+        <% end %>
+
       </div>
     </nav>
 
