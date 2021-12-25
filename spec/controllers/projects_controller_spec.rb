@@ -31,6 +31,16 @@ RSpec.describe ProjectsController, type: :controller do
       expect(response).to have_http_status(:found)
       expect(Project.all.count).to eq 1
     end
+
+    it "project names can't be blank" do
+      user = FactoryBot.create(:user)
+      sign_in user
+      post :create, params: {
+        user_id: user.id,
+        project: { name: "" }
+      }
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
   end
 
   describe "GET #show" do
