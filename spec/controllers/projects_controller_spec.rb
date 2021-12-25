@@ -32,4 +32,12 @@ RSpec.describe ProjectsController, type: :controller do
       expect(Project.all.count).to eq 1
     end
   end
+
+  describe "GET #show" do
+    it "should load the page" do
+      project = FactoryBot.create(:project)
+      get :show, params: { id: project.id }
+      expect(response).to have_http_status(:success)
+    end
+  end
 end

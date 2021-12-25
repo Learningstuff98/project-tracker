@@ -12,8 +12,8 @@ FactoryBot.define do
   end
 
   factory :project do
-    
+    name { "project name" }
+    association :user
   end
-
 
 end
