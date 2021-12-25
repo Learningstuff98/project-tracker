@@ -14,4 +14,22 @@ RSpec.describe ProjectsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "POST #create" do
+    it "should authenticate the user" do
+      post :create
+      expect(response).to redirect_to new_user_session_path
+    end
+
+    it "users should be able to start projects" do
+      user = FactoryBot.create(:user)
+      sign_in user
+      post :create, params: {
+        user_id: user.id,
+        project: { name: "project name" }
+      }
+      expect(response).to have_http_status(:found)
+      expect(Project.all.count).to eq 1
+    end
+  end
 end
