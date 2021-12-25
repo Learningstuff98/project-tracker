@@ -2,6 +2,8 @@
   <div class="box text-center col-8">
 
     <% if current_user %>
+      <h3><%= link_to "Start a project", new_project_path, class: "green" %></h3>
+      <br/>
       <h3><%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "green" %></h3>
     <% else %>
       <h3><%= link_to "Log in", new_user_session_path, class: "green" %></h3>
