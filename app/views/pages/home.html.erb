@@ -13,3 +13,14 @@
 
   </div>
 </div>
+
+<br/>
+
+<% if current_user %>
+  <% @projects.each do |project| %>
+    <div class="container">
+      <h3><%= link_to project.name, project_path(project), class: "green" %></h3>
+      <br/>
+    </div>
+  <% end %>
+<% end %>
