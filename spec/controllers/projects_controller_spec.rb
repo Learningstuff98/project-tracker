@@ -74,4 +74,62 @@ RSpec.describe ProjectsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "PATCH #update" do
+    it "should authenticate the user" do
+      project = FactoryBot.create(:project)
+      post :update, params: {
+        id: project.id,
+        project: {
+          name: "new name"
+        }
+      }
+      expect(response).to redirect_to new_user_session_path
+    end
+
+    it "should let the project owner make updates" do
+      project = FactoryBot.create(:project)
+      user = FactoryBot.create(:user)
+      sign_in project.user
+      post :update, params: {
+        id: project.id,
+        project: {
+          name: "new name"
+        }
+      }
+      expect(response).to have_http_status(:found)
+      project.reload
+      expect(project.name).to eq "new name"
+    end
+
+    it "should only let the project owner make updates" do
+      project = FactoryBot.create(:project)
+      user = FactoryBot.create(:user)
+      sign_in user
+      post :update, params: {
+        id: project.id,
+        project: {
+          name: "new name"
+        }
+      }
+      expect(response).to have_http_status(:unauthorized)
+      project.reload
+      expect(project.name).to eq "project name"
+    end
+
+    it "project names can't be blank" do
+      project = FactoryBot.create(:project)
+      user = FactoryBot.create(:user)
+      sign_in project.user
+      post :update, params: {
+        id: project.id,
+        project: {
+          name: ""
+        }
+      }
+      expect(response).to have_http_status(:unprocessable_entity)
+      project.reload
+      expect(project.name).to eq "project name"
+    end
+  end
 end
