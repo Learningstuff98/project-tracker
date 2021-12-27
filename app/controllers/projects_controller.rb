@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit]
 
   def new
     @project = Project.new
@@ -16,6 +16,13 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+  end
+
+  def edit
+    @project = Project.find(params[:id])
+    if current_user.id != @project.user_id
+      render plain: 'Unauthorized', status: :unauthorized
+    end
   end
 
   private

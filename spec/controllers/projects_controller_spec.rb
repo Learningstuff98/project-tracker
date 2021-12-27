@@ -50,4 +50,28 @@ RSpec.describe ProjectsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "GET #edit" do
+    it "should authenticate the user" do
+      project = FactoryBot.create(:project)
+      get :edit, params: { id: project.id }
+      expect(response).to redirect_to new_user_session_path
+    end
+
+    it "should not let other users get to the edit page" do
+      project = FactoryBot.create(:project)
+      user = FactoryBot.create(:user)
+      sign_in user
+      get :edit, params: { id: project.id }
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it "load the page for the correct user" do
+      project = FactoryBot.create(:project)
+      user = FactoryBot.create(:user)
+      sign_in project.user
+      get :edit, params: { id: project.id }
+      expect(response).to have_http_status(:success)
+    end
+  end
 end

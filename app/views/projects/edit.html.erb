@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="box text-center col-8">
+
+    <h2 class="green">Edit this project</h2>
+
+    <br/>
+
+    <%= simple_form_for @project, url: project_path(@project) do |f| %>
+      <h4 class="green"><%= f.input :name %></h4>
+
+      <br/>
+
+      <%= f.submit 'Update', class: 'btn btn-primary' %>
+    <% end %>
+
+  </div>
+</div>
