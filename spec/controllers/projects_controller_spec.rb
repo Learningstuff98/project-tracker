@@ -102,7 +102,7 @@ RSpec.describe ProjectsController, type: :controller do
       expect(project.name).to eq "new name"
     end
 
-    it "should only let the project owner make updates" do
+    it "should not let other users make updates" do
       project = FactoryBot.create(:project)
       user = FactoryBot.create(:user)
       sign_in user
@@ -130,6 +130,32 @@ RSpec.describe ProjectsController, type: :controller do
       expect(response).to have_http_status(:unprocessable_entity)
       project.reload
       expect(project.name).to eq "project name"
+    end
+  end
+
+  describe "DELETE #destroy" do
+    it "should authenticate the user" do
+      project = FactoryBot.create(:project)
+      delete :destroy, params: { id: project.id }
+      expect(response).to redirect_to new_user_session_path
+    end
+
+    it "should let the project owner delete the project" do
+      project = FactoryBot.create(:project)
+      user = FactoryBot.create(:user)
+      sign_in project.user
+      delete :destroy, params: { id: project.id }
+      expect(response).to have_http_status(:found)
+      expect(Project.all.count).to eq 0
+    end
+
+    it "should not let other users delete the project" do
+      project = FactoryBot.create(:project)
+      user = FactoryBot.create(:user)
+      sign_in user
+      delete :destroy, params: { id: project.id }
+      expect(response).to have_http_status(:unauthorized)
+      expect(Project.all.count).to eq 1
     end
   end
 end

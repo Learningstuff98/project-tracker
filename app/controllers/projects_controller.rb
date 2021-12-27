@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def new
     @project = Project.new
@@ -34,6 +34,16 @@ class ProjectsController < ApplicationController
       else
         render :edit, status: :unprocessable_entity
       end
+    else
+      render plain: 'Unauthorized', status: :unauthorized
+    end
+  end
+
+  def destroy
+    @project = Project.find(params[:id])
+    if current_user.id == @project.user_id
+      @project.destroy
+      redirect_to root_path
     else
       render plain: 'Unauthorized', status: :unauthorized
     end
