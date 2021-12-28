@@ -15,18 +15,18 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    @project = current_project
   end
 
   def edit
-    @project = Project.find(params[:id])
+    @project = current_project
     if current_user.id != @project.user_id
       render plain: 'Unauthorized', status: :unauthorized
     end
   end
 
   def update
-    @project = Project.find(params[:id])
+    @project = current_project
     if current_user.id == @project.user_id
       @project.update(project_params)
       if @project.valid?
@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find(params[:id])
+    @project = current_project
     if current_user.id == @project.user_id
       @project.destroy
       redirect_to root_path
@@ -50,6 +50,10 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def current_project
+    @project ||= Project.find(params[:id])
+  end
 
   def project_params
     params.require(:project).permit(:name)
