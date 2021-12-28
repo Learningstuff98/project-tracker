@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
 
   def update
     @project = current_project
-    if current_user.id == @project.user_id
+    if @project.project_owner?(current_user)
       @project.update(project_params)
       if @project.valid?
         redirect_to project_path(@project)
@@ -41,7 +41,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project = current_project
-    if current_user.id == @project.user_id
+    if @project.project_owner?(current_user)
       @project.destroy
       redirect_to root_path
     else
