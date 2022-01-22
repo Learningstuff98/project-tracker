@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_12_25_014548) do
 
   create_table "projects", force: :cascade do |t|
     t.integer "user_id"
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_projects_on_user_id"

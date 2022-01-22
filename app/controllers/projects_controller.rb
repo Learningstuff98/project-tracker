@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def new
     @project = Project.new
@@ -7,10 +7,10 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.create(project_params)
-    if @project.valid?
+    if @project.save
       redirect_to project_path(@project)
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
@@ -20,33 +20,21 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = current_project
-    if current_user.id != @project.user_id
-      render plain: 'Unauthorized', status: :unauthorized
-    end
   end
 
   def update
     @project = current_project
-    if @project.project_owner?(current_user)
-      @project.update(project_params)
-      if @project.valid?
-        redirect_to project_path(@project)
-      else
-        render :edit, status: :unprocessable_entity
-      end
+    if @project.update(project_params)
+      redirect_to project_path(@project)
     else
-      render plain: 'Unauthorized', status: :unauthorized
+      render :edit
     end
   end
 
   def destroy
     @project = current_project
-    if @project.project_owner?(current_user)
-      @project.destroy
-      redirect_to root_path
-    else
-      render plain: 'Unauthorized', status: :unauthorized
-    end
+    @project.destroy
+    redirect_to root_path
   end
 
   private
@@ -58,5 +46,4 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:name)
   end
-
 end
