@@ -33,14 +33,14 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project = current_project
-    @project.destroy
+    flash[:error] = "Failed to delete project." unless @project.destroy
     redirect_to root_path
   end
 
   private
 
   def current_project
-    @project ||= Project.find(params[:id])
+    @current_project ||= Project.find(params[:id])
   end
 
   def project_params
