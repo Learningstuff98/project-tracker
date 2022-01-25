@@ -38,6 +38,7 @@ RSpec.describe "Projects", type: :request do
     describe "GET #edit" do
       it "should load the page" do
         project = FactoryBot.create(:project)
+        sign_in project.user
         get edit_project_path(project)
         expect(response).to be_successful
       end
@@ -46,6 +47,7 @@ RSpec.describe "Projects", type: :request do
     describe "PATCH #update" do
       it "should let users update projects" do
         project = FactoryBot.create(:project)
+        sign_in project.user
         patch project_path(
           {
             id: project.id,
@@ -63,6 +65,7 @@ RSpec.describe "Projects", type: :request do
     describe "DELETE #destroy" do
       it "should let users delete projects" do
         project = FactoryBot.create(:project)
+        sign_in project.user
         delete project_path(project)
         expect(response).to be_redirect
         expect(Project.all.count).to eq 0

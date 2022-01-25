@@ -20,11 +20,14 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = current_project
+    render plain: 'Unauthorized', status: :unauthorized unless @project.project_owner?(current_user)
   end
 
   def update
     @project = current_project
-    if @project.update(project_params)
+    if !@project.project_owner?(current_user)
+      render plain: 'Unauthorized', status: :unauthorized
+    elsif @project.update(project_params)
       redirect_to project_path(@project)
     else
       render :edit
@@ -33,8 +36,14 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project = current_project
-    flash[:error] = "Failed to delete project." unless @project.destroy
-    redirect_to root_path
+    if !@project.project_owner?(current_user)
+      render plain: 'Unauthorized', status: :unauthorized
+    elsif !@project.destroy
+      flash[:error] = "Failed to delete project."
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
   end
 
   private
