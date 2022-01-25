@@ -1,17 +1,8 @@
 <div class="container">
   <div class="box text-center col-8">
-
-    <h2 class="green">Start a new project</h2>
-
-    <br/>
-
+    <h2 class="green spacing-below">Start a new project</h2>
     <%= simple_form_for @project, url: projects_path do |f| %>
-      <h4 class="green"><%= f.input :name %></h4>
-
-      <br/>
-
-      <%= f.submit 'Start', class: 'btn btn-primary' %>
+      <%= render partial: "project_form", locals: { f: f } %>
     <% end %>
-
   </div>
 </div>

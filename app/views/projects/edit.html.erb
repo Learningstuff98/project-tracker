@@ -1,17 +1,8 @@
 <div class="container">
   <div class="box text-center col-8">
-
-    <h2 class="green">Edit this project</h2>
-
-    <br/>
-
+    <h2 class="green spacing-below">Edit this project</h2>
     <%= simple_form_for @project, url: project_path(@project) do |f| %>
-      <h4 class="green"><%= f.input :name %></h4>
-
-      <br/>
-
-      <%= f.submit 'Update', class: 'btn btn-primary' %>
+      <%= render partial: "project_form", locals: { f: f } %>
     <% end %>
-
   </div>
 </div>

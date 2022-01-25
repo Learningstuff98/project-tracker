@@ -1,26 +1,19 @@
 <div class="container">
-  <div class="box text-center col-8">
-
+  <div class="box text-center col-8 spacing-below">
     <% if current_user %>
-      <h3><%= link_to "Start a project", new_project_path, class: "green" %></h3>
-      <br/>
+      <h3 class="spacing-below"><%= link_to "Start a project", new_project_path, class: "green" %></h3>
       <h3><%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "green" %></h3>
     <% else %>
-      <h3><%= link_to "Log in", new_user_session_path, class: "green" %></h3>
-      <br/>
+      <h3 class="spacing-below"><%= link_to "Log in", new_user_session_path, class: "green" %></h3>
       <h3><%= link_to "Sign up", new_user_registration_path, class: "green" %></h3>
     <% end %>
-
   </div>
 </div>
-
-<br/>
 
 <% if current_user %>
   <% @projects.each do |project| %>
     <div class="container">
-      <h3><%= link_to project.name, project_path(project), class: "green" %></h3>
-      <br/>
+      <h3 class="spacing-below"><%= link_to project.name, project_path(project), class: "green" %></h3>
     </div>
   <% end %>
 <% end %>

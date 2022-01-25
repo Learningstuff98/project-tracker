@@ -12,44 +12,24 @@
   </head>
 
   <body>
-
     <div class="collapse" id="navbarToggleExternalContent">
       <div class="header-color header-element">
-
-        <h4>
-          <%= link_to "Homepage", root_path, class: "green" %>
-        </h4>
-
-        <h4>
-          <%= link_to "Github", href="https://github.com/Learningstuff98/project-tracker", class: "green" %>
-        </h4>
-
-        <h4>
-          <%= link_to "Linkedin", href="https://www.linkedin.com/in/andy-strube-6231ba152", class: "green" %>
-        </h4>
-
-        <h4>
-          <%= link_to "Resume", href="https://docs.google.com/document/d/1qm4nBdIZfsx8zh4IwYvkVuQYclpOXUCVxnC9vV3_eBM/edit", class: "green" %>
-        </h4>
-
-        <h4 class="green">
-          andystrube64@gmail.com
-        </h4>
-
+        <h4><%= link_to "Homepage", root_path, class: "green" %></h4>
+        <h4><%= link_to "Github", href="https://github.com/Learningstuff98/project-tracker", class: "green" %></h4>
+        <h4><%= link_to "Linkedin", href="https://www.linkedin.com/in/andy-strube-6231ba152", class: "green" %></h4>
+        <h4><%= link_to "Resume", href="https://docs.google.com/document/d/1qm4nBdIZfsx8zh4IwYvkVuQYclpOXUCVxnC9vV3_eBM/edit", class: "green" %></h4>
+        <h4 class="green">andystrube64@gmail.com</h4>
       </div>
     </div>
 
     <nav class="navbar header-color green">
       <div class="container-fluid">
-
         <div type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
           <h4>More Info</h4>
         </div>
-
         <% if current_user %>
           <h4><%= "Logged in as #{current_user.username}" %></h4>
         <% end %>
-
       </div>
     </nav>
 
