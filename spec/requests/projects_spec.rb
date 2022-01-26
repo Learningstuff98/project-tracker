@@ -72,4 +72,45 @@ RSpec.describe "Projects", type: :request do
       end
     end
   end
+
+  context "While logged in as a foreign user" do
+    before do
+      @user = FactoryBot.create(:user)
+      sign_in(@user)
+    end
+
+    describe "GET #edit" do
+      it "should be unauthorized" do
+        project = FactoryBot.create(:project)
+        get edit_project_path(project)
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    describe "PATCH #update" do
+      it "should be unauthorized" do
+        project = FactoryBot.create(:project)
+        patch project_path(
+          {
+            id: project.id,
+            project: {
+              name: "new name"
+            }
+          }
+        )
+        expect(response).to have_http_status(:unauthorized)
+        project.reload
+        expect(project.name).to eq "project name"
+      end
+    end
+
+    describe "DELETE #destroy" do
+      it "should be unauthorized" do
+        project = FactoryBot.create(:project)
+        delete project_path(project)
+        expect(response).to have_http_status(:unauthorized)
+        expect(Project.all.count).to eq 1
+      end
+    end
+  end
 end

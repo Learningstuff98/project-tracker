@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_authorized, only: %i[edit update destroy]
 
   def new
     @project = Project.new
@@ -20,14 +21,11 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = current_project
-    render plain: 'Unauthorized', status: :unauthorized unless @project.project_owner?(current_user)
   end
 
   def update
     @project = current_project
-    if !@project.project_owner?(current_user)
-      render plain: 'Unauthorized', status: :unauthorized
-    elsif @project.update(project_params)
+    if @project.update(project_params)
       redirect_to project_path(@project)
     else
       render :edit
@@ -36,17 +34,16 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project = current_project
-    if !@project.project_owner?(current_user)
-      render plain: 'Unauthorized', status: :unauthorized
-    elsif !@project.destroy
-      flash[:error] = "Failed to delete project."
-      redirect_to root_path
-    else
-      redirect_to root_path
-    end
+    flash[:error] = "Failed to delete project." unless @project.destroy
+    redirect_to root_path
   end
 
   private
+
+  def require_authorized
+    @project = current_project
+    render plain: 'Unauthorized', status: :unauthorized unless @project.project_owner?(current_user)
+  end
 
   def current_project
     @current_project ||= Project.find(params[:id])
