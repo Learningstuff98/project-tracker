@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @projects = search(params[:keyword])
+    @projects = search(params[:keyword]) if current_user
   end
 
   private
