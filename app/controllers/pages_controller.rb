@@ -7,9 +7,9 @@ class PagesController < ApplicationController
 
   def search(keyword)
     if keyword.present?
-      Project.where("name ILIKE ?", "%#{keyword}%")
+      Project.where("name ILIKE ?", "%#{keyword}%").order("created_at DESC").page params[:page]
     else
-      current_user.projects.order("created_at DESC")
+      current_user.projects.order("created_at DESC").page params[:page]
     end
   end
 end
