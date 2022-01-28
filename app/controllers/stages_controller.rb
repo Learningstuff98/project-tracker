@@ -4,7 +4,8 @@ class StagesController < ApplicationController
 
   def create
     @project = Project.find(params[:project_id])
-    @project.stages.create(stage_params)
+    stage = @project.stages.create(stage_params)
+    SendStageJob.perform_later(stage)
   end
 
   private
