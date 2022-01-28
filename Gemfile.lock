@@ -189,6 +189,7 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
+    redis (4.5.1)
     regexp_parser (2.2.0)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -304,6 +305,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.1)
   react-rails
+  redis (~> 4.0)
   rspec-rails (~> 5.0.0)
   rubocop-rails
   sass-rails (>= 6)
