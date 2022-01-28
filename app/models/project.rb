@@ -1,5 +1,6 @@
 class Project < ApplicationRecord
   belongs_to :user
+  has_many :stages, dependent: :delete_all
   validates :name, presence: true
   paginates_per 8
 

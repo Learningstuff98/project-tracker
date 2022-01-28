@@ -4,5 +4,11 @@
     <h4><%= link_to 'Edit this project', edit_project_path(@project), class: "green" %></h4>
     <h4><%= link_to "Delete this project", project_path(@project), method: :delete, data: { confirm: "Are you sure?" }, class: "green"%></h4>
   <% end %>
-  <h4><%= link_to 'Homepage', root_path, class: "green" %></h4>
+  <h4 class="spacing-below"><%= link_to 'Homepage', root_path, class: "green" %></h4>
+
+  <%= react_component("Project", {
+    project: @project,
+    stages: @stages,
+    root_url: root_url
+  }) %>
 </div>

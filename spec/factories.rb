@@ -14,4 +14,9 @@ FactoryBot.define do
     name { "project name" }
     association :user
   end
+
+  factory :stage do
+    name { "stage name" }
+    association :project
+  end
 end
