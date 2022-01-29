@@ -6,6 +6,7 @@ function Stages(props) {
   const stageComponent = (stage) => {
     return  <Stage
       stage={stage}
+      root_url={props.root_url}
     /> 
   };
 

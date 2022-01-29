@@ -1,7 +1,10 @@
 class SendStageJob < ApplicationJob
   queue_as :default
 
-  def perform(stage)
-    ActionCable.server.broadcast "project_channel", { stage: stage }
+  def perform(project)
+    ActionCable.server.broadcast "project_channel", {
+      project: project,
+      stages: project.stages
+    }
   end
 end

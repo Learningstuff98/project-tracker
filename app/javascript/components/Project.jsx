@@ -13,8 +13,8 @@ function Project(props) {
   const handleWebsocketUpdates = () => {
     consumer.subscriptions.create({channel: "ProjectChannel"}, {
       received(data) {
-        if(data.stage.project_id === props.project.id) {
-          setStages([...stages, data.stage]);
+        if(data.project.id === props.project.id) {
+          setStages(data.stages);
         }
       }
     });
@@ -27,6 +27,7 @@ function Project(props) {
 
   const stagesComponent = <Stages
     stages={stages}
+    root_url={props.root_url}
   />
 
   return <div>
