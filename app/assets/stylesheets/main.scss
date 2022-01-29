@@ -51,3 +51,20 @@ body {
 .paginator-spacing {
   margin-right: 15px;
 }
+
+.stages {
+  display: flex;
+  overflow-x: auto;
+}
+
+.stage-box {
+  min-width: 300px;
+  min-height: 550px;
+  background-color: #000000;
+  margin-right: 30px;
+  border-radius: 10px;
+}
+
+.stage-name {
+  padding: 15px;
+}

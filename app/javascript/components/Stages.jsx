@@ -1,11 +1,19 @@
 import React from "react";
+import Stage from './Stage';
 
 function Stages(props) {
-  return <div>
+
+  const stageComponent = (stage) => {
+    return  <Stage
+      stage={stage}
+    /> 
+  };
+
+  return <div className="stages">
     {props.stages.map((stage) => {
-      return <h3 className="green" key={stage.id}>
-        {stage.name}
-      </h3>
+      return <div key={stage.id}>
+        {stageComponent(stage)}
+      </div>
     })}
   </div>
 }
