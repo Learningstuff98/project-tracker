@@ -1,4 +1,4 @@
-class SendStageJob < ApplicationJob
+class SendStagesJob < ApplicationJob
   queue_as :default
 
   def perform(project)

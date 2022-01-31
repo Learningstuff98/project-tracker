@@ -5,14 +5,14 @@ class StagesController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     stage = @project.stages.create(stage_params)
-    SendStageJob.perform_later(@project) if stage.save
+    SendStagesJob.perform_later(@project) if stage.save
   end
 
   def destroy
     @stage = Stage.find(params[:id])
     project = @stage.project
     @stage.destroy
-    SendStageJob.perform_later(project)
+    SendStagesJob.perform_later(project)
   end
 
   private
