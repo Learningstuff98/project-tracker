@@ -4,14 +4,20 @@ import Stage from './Stage';
 function Stages(props) {
 
   const stageComponent = (stage) => {
-    return  <Stage
+    return <Stage
       stage={stage}
       root_url={props.root_url}
     /> 
   };
 
+  const sortStagesByID = () => {
+    return props.stages.sort((x, y) => {
+      return x.id - y.id;
+    });
+  };
+
   return <div className="stages">
-    {props.stages.map((stage) => {
+    {sortStagesByID().map((stage) => {
       return <div key={stage.id}>
         {stageComponent(stage)}
       </div>
