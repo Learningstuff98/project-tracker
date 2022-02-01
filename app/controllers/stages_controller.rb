@@ -9,13 +9,22 @@ class StagesController < ApplicationController
   end
 
   def destroy
-    @stage = Stage.find(params[:id])
+    @stage = current_stage
     project = @stage.project
     @stage.destroy
     SendStagesJob.perform_later(project)
   end
 
+  def update
+    @stage = current_stage
+    SendStagesJob.perform_later(@stage.project) if @stage.update(stage_params)
+  end
+
   private
+
+  def current_stage
+    @current_stage ||= Stage.find(params[:id])
+  end
 
   def stage_params
     params.require(:stage).permit(:name)

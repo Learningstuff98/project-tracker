@@ -13,8 +13,12 @@ body {
   color: #00C122;
 }
 
-.red{
+.red {
   color: #af2b2b;
+}
+
+.blue {
+  color: #0070f0;
 }
 
 .cursor:hover {
@@ -70,9 +74,10 @@ body {
 }
 
 .stage-header-elements {
-  padding: 15px;
+  padding: 12px;
 }
 
-.stage-delete-button {
+.stage-button {
   max-width: 30px;
+  margin-left: 12px;
 }
