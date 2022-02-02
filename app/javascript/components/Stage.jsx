@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import StageEditForm from './StageEditForm';
+import EditStageForm from './EditStageForm';
 
 function Stage(props) {
   const [showEditForm, setShowEditForm] = useState(false);
@@ -12,7 +12,7 @@ function Stage(props) {
     }
   };
 
-  const stageEditForm = <StageEditForm
+  const editStageForm = <EditStageForm
     root_url={props.root_url}
     stage={props.stage}
     setShowEditForm={setShowEditForm}
@@ -20,7 +20,7 @@ function Stage(props) {
 
   if(showEditForm) {
     return <div className="stage-box">
-      <div className="stage-header-elements">{stageEditForm}</div>
+      <div className="stage-header-elements">{editStageForm}</div>
       <h5 className="cursor stage-button blue" onClick={() => setShowEditForm(false)}>Close</h5>
     </div>
   }

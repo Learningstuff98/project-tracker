@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import consumer from "channels/consumer";
-import StageForm from './StageForm';
 import Stages from './Stages';
 
 function Project(props) {
@@ -20,18 +19,13 @@ function Project(props) {
     });
   };
 
-  const stageForm = <StageForm
-    project={props.project}
-    root_url={props.root_url}
-  />
-
   const stagesComponent = <Stages
     stages={stages}
     root_url={props.root_url}
+    project={props.project}
   />
 
   return <div>
-    {stageForm}
     {stagesComponent}
   </div>
 }

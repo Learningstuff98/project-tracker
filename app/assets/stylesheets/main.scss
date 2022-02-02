@@ -67,7 +67,7 @@ body {
 
 .stage-box {
   min-width: 300px;
-  min-height: 550px;
+  min-height: 650px;
   background-color: #000000;
   border: 2px solid #666666;
   margin-right: 30px;
@@ -80,11 +80,15 @@ body {
 
 .stage-button {
   max-width: 30px;
-  margin-left: 12px;
+  margin-left: 13px;
 }
 
 input {
   border: 2px solid #666666;
   background-color: #d1d1d1;
   border-radius: 2px;
+}
+
+.new-stage-button {
+  max-width: 190px;
 }
