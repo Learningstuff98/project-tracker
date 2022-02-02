@@ -7,7 +7,7 @@ function Stage(props) {
 
   const deleteStage = () => {
     if(confirm("Are you sure?")) {
-      axios.delete(`${props.root_url}/stages/${props.stage.id}`)
+      axios.delete(`${props.root_url}/projects/${props.project.id}/stages/${props.stage.id}`)
       .catch((err) => console.log(err.response.data));
     }
   };
@@ -16,7 +16,17 @@ function Stage(props) {
     root_url={props.root_url}
     stage={props.stage}
     setShowEditForm={setShowEditForm}
+    project={props.project}
   />
+
+  const handleButtons = () => {
+    if(props.isProjectOwner) {
+      return <div>
+        <h5 className="cursor stage-button blue" onClick={() => setShowEditForm(true)}>Edit</h5>
+        <h5 className="cursor stage-button red" onClick={() => deleteStage()}>Delete</h5>
+      </div>
+    }
+  };
 
   if(showEditForm) {
     return <div className="stage-box">
@@ -27,8 +37,7 @@ function Stage(props) {
 
   return <div className="stage-box">
     <h3 className="stage-header-elements">{props.stage.name}</h3>
-    <h5 className="cursor stage-button blue" onClick={() => setShowEditForm(true)}>Edit</h5>
-    <h5 className="cursor stage-button red" onClick={() => deleteStage()}>Delete</h5>
+    {handleButtons()}
   </div>
 }
 

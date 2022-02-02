@@ -8,6 +8,8 @@ function Stages(props) {
     return <Stage
       stage={stage}
       root_url={props.root_url}
+      project={props.project}
+      isProjectOwner={props.isProjectOwner}
     /> 
   };
 
@@ -17,10 +19,14 @@ function Stages(props) {
     });
   };
 
-  const newStage = <NewStage
-    root_url={props.root_url}
-    project={props.project}
-  />
+  const handleNewStage = () => {
+    if(props.isProjectOwner) {
+      return <NewStage
+        root_url={props.root_url}
+        project={props.project}
+      />
+    }
+  };
 
   return <div className="stages">
     {sortStagesByID().map((stage) => {
@@ -28,7 +34,7 @@ function Stages(props) {
         {stageComponent(stage)}
       </div>
     })}
-    {newStage}
+    {handleNewStage()}
   </div>
 }
 

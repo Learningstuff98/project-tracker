@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'pages#home'
   resources :projects do
-    resources :stages, only: [:create]
+    resources :stages
   end
-  resources :stages, only: [:update, :destroy]
 end

@@ -5,7 +5,7 @@ function EditStageForm(props) {
   const [input, setInput] = useState(props.stage.name);
 
   const submitStage = (formData) => {
-    axios.patch(`${props.root_url}/stages/${props.stage.id}`, formData)
+    axios.patch(`${props.root_url}/projects/${props.project.id}/stages/${props.stage.id}`, formData)
     .catch((err) => console.log(err.response.data));
   };
 

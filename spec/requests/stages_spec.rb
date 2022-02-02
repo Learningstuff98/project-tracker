@@ -23,8 +23,9 @@ RSpec.describe "Stages", type: :request do
     describe "PATCH #update" do
       it "should let users update stages" do
         stage = FactoryBot.create(:stage)
-        patch stage_path(
+        patch project_stage_path(
           {
+            project_id: @project.id,
             id: stage.id,
             stage: {
               name: "new name"
@@ -39,7 +40,12 @@ RSpec.describe "Stages", type: :request do
     describe "DELETE #destroy" do
       it "should let users delete stages" do
         stage = FactoryBot.create(:stage)
-        delete stage_path(stage)
+        delete project_stage_path(
+          {
+            project_id: @project.id,
+            id: stage.id
+          }
+        )
         expect(Stage.all.count).to eq 0
       end
     end
@@ -68,8 +74,9 @@ RSpec.describe "Stages", type: :request do
     describe "PATCH #update" do
       it "should be unauthorized" do
         stage = FactoryBot.create(:stage)
-        patch stage_path(
+        patch project_stage_path(
           {
+            project_id: @project.id,
             id: stage.id,
             stage: {
               name: "new name"
@@ -85,7 +92,12 @@ RSpec.describe "Stages", type: :request do
     describe "DELETE #destroy" do
       it "should be unauthorized" do
         stage = FactoryBot.create(:stage)
-        delete stage_path(stage)
+        delete project_stage_path(
+          {
+            project_id: @project.id,
+            id: stage.id
+          }
+        )
         expect(response).to have_http_status(:unauthorized)
         expect(Stage.all.count).to eq 1
       end
