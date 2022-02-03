@@ -41,11 +41,6 @@ class ProjectsController < ApplicationController
 
   private
 
-  def require_authorized
-    @project = current_project
-    render plain: 'Unauthorized', status: :unauthorized unless @project.project_owner?(current_user)
-  end
-
   def current_project
     @current_project ||= Project.find(params[:id])
   end

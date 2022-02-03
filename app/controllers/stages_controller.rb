@@ -4,24 +4,25 @@ class StagesController < ApplicationController
   before_action :require_authorized
 
   def create
-    stage = current_project.stages.create(stage_params)
-    SendStagesJob.perform_later(current_project) if stage.save
+    @project = current_project
+    @stage = @project.stages.create(stage_params)
+    SendStagesJob.perform_later(@project) if @stage.save
   end
 
   def destroy
-    current_stage.destroy
-    SendStagesJob.perform_later(current_project)
+    @project = current_project
+    @stage = current_stage
+    @stage.destroy
+    SendStagesJob.perform_later(@project)
   end
 
   def update
-    SendStagesJob.perform_later(current_project) if current_stage.update(stage_params)
+    @project = current_project
+    @stage = current_stage
+    SendStagesJob.perform_later(@project) if @stage.update(stage_params)
   end
 
   private
-
-  def require_authorized
-    render plain: 'Unauthorized', status: :unauthorized unless current_project.project_owner?(current_user)
-  end
 
   def current_project
     @current_project ||= Project.find(params[:project_id])

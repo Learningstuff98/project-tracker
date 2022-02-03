@@ -34,7 +34,9 @@ RSpec.describe "Projects", type: :request do
         expect(response).to be_successful
       end
     end
+  end
 
+  context "While logged in as the project owner" do
     describe "GET #edit" do
       it "should load the page" do
         project = FactoryBot.create(:project)
