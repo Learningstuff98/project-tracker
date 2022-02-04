@@ -27,6 +27,7 @@ function Project(props) {
     stages={stages}
     root_url={props.root_url}
     project={props.project}
+    issues={props.issues}
     isProjectOwner={isProjectOwner()}
   />
 

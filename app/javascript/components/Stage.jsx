@@ -24,20 +24,37 @@ function Stage(props) {
       return <div>
         <h5 className="cursor stage-button blue" onClick={() => setShowEditForm(true)}>Edit</h5>
         <h5 className="cursor stage-button red" onClick={() => deleteStage()}>Delete</h5>
+        <a className="cursor stage-button green new-issue-link" href={`${props.root_url}/projects/${props.project.id}/stages/${props.stage.id}/issues/new`}>
+          New Issue
+        </a>
       </div>
     }
+  };
+
+  const filterIssues = () => {
+    return props.issues.filter(issue => issue.stage_id === props.stage.id);
+  };
+
+  const renderIssues = () => {
+    return filterIssues().map((issue) => {
+      return <h5 key={issue.id} className="green">
+        {issue.title}
+      </h5>
+    });
   };
 
   if(showEditForm) {
     return <div className="stage-box">
       <div className="stage-header-elements">{editStageForm}</div>
       <h5 className="cursor stage-button blue" onClick={() => setShowEditForm(false)}>Close</h5>
+      {renderIssues()}
     </div>
   }
 
   return <div className="stage-box">
     <h3 className="stage-header-elements">{props.stage.name}</h3>
     {handleButtons()}
+    {renderIssues()}
   </div>
 }
 

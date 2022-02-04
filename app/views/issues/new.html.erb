@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="box text-center col-8">
+    <h2 class="green spacing-below">Open a new issue</h2>
+    <%= simple_form_for @issue, url: project_stage_issues_path(@project, @stage) do |f| %>
+      <%= render partial: "issue_form", locals: { f: f } %>
+    <% end %>
+  </div>
+</div>

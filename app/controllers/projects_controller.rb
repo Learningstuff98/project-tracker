@@ -18,6 +18,7 @@ class ProjectsController < ApplicationController
   def show
     @project = current_project
     @stages = @project.stages
+    @issues = @project.collect_all_issues
   end
 
   def edit

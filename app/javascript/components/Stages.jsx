@@ -10,6 +10,7 @@ function Stages(props) {
       root_url={props.root_url}
       project={props.project}
       isProjectOwner={props.isProjectOwner}
+      issues={props.issues}
     /> 
   };
 
