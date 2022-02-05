@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import EditStageForm from './EditStageForm';
+import Issue from './Issue';
 
 function Stage(props) {
   const [showEditForm, setShowEditForm] = useState(false);
@@ -31,15 +32,22 @@ function Stage(props) {
     }
   };
 
+  const renderIssue = (issue) => {
+    return <Issue
+      issue={issue}
+      root_url={props.root_url}
+    />
+  };
+
   const filterIssues = () => {
     return props.issues.filter(issue => issue.stage_id === props.stage.id);
   };
 
   const renderIssues = () => {
     return filterIssues().map((issue) => {
-      return <h5 key={issue.id} className="green">
-        {issue.title}
-      </h5>
+      return <div key={issue.id}>
+        {renderIssue(issue)}
+      </div>
     });
   };
 

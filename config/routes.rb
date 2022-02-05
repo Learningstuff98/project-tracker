@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   root 'pages#home'
   resources :projects do
     resources :stages do
-      resources :issues
+      resources :issues, only: [:new, :create]
     end
   end
+  resources :issues, only: [:show]
 end

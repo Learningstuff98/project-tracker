@@ -21,11 +21,20 @@ RSpec.describe "Issues", type: :request do
           project_id: @project.id,
           stage_id: @stage.id,
           issue: {
-            title: "issue title"
+            title: "issue title",
+            description: "issue description"
           }
         )
         expect(response).to be_redirect
         expect(Issue.all.count).to eq 1
+      end
+    end
+
+    describe "GET #show" do
+      it "should load the page" do
+        issue = FactoryBot.create(:issue)
+        get issue_path(issue)
+        expect(response).to be_successful
       end
     end
   end
@@ -51,10 +60,19 @@ RSpec.describe "Issues", type: :request do
           project_id: @project.id,
           stage_id: @stage.id,
           issue: {
-            title: "issue title"
+            title: "issue title",
+            description: "issue description"
           }
         )
         expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    describe "GET #show" do
+      it "should load the page" do
+        issue = FactoryBot.create(:issue)
+        get issue_path(issue)
+        expect(response).to be_successful
       end
     end
   end

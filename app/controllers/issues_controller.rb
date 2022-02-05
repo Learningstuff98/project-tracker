@@ -20,7 +20,15 @@ class IssuesController < ApplicationController
     end
   end
 
+  def show
+    @issue = current_issue
+  end
+
   private
+
+  def current_issue
+    @current_issue ||= Issue.find(params[:id])
+  end
 
   def current_project
     @current_project ||= Project.find(params[:project_id])
@@ -31,6 +39,6 @@ class IssuesController < ApplicationController
   end
 
   def issue_params
-    params.require(:issue).permit(:title)
+    params.require(:issue).permit(:title, :description)
   end
 end

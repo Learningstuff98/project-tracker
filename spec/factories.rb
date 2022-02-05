@@ -1,7 +1,4 @@
 FactoryBot.define do
-  factory :issue do
-  end
-
   factory :user do
     sequence :email do |n|
       "dummyEmail#{n}@gmail.com"
@@ -21,5 +18,11 @@ FactoryBot.define do
   factory :stage do
     name { "stage name" }
     association :project
+  end
+
+  factory :issue do
+    title { "issue title" }
+    description { "issue description" }
+    association :stage
   end
 end

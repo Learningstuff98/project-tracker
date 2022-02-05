@@ -1,2 +1,6 @@
-<h4 class="green spacing-below"><%= f.input :title %></h4>
+<h4 class="green issue-title-input"><%= f.input :title %></h4>
+<h4 class="green">Description</h4>
+<div class="issue-description-input spacing-below">
+  <%= f.rich_text_area :description %>
+</div>
 <%= f.submit 'Save', class: 'btn btn-primary' %>
