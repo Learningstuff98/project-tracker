@@ -4,6 +4,7 @@ import Stages from './Stages';
 
 function Project(props) {
   const [stages, setStages] = useState(props.stages);
+  const [issues, setIssues] = useState(props.issues);
 
   useEffect(() => {
     handleWebsocketUpdates();
@@ -13,7 +14,12 @@ function Project(props) {
     consumer.subscriptions.create({channel: "ProjectChannel"}, {
       received(data) {
         if(data.project.id === props.project.id) {
-          setStages(data.stages);
+          if(data.stages) {
+            setStages(data.stages);
+          }
+          if(data.issues) {
+            setIssues(data.issues);
+          }
         }
       }
     });
@@ -27,7 +33,7 @@ function Project(props) {
     stages={stages}
     root_url={props.root_url}
     project={props.project}
-    issues={props.issues}
+    issues={issues}
     isProjectOwner={isProjectOwner()}
   />
 

@@ -13,6 +13,7 @@ class IssuesController < ApplicationController
     @stage = current_stage
     @issue = @stage.issues.create(issue_params)
     if @issue.save
+      SendIssuesJob.perform_later(@project)
       redirect_to project_path(@project)
     else
       render :new
