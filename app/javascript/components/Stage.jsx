@@ -52,14 +52,14 @@ function Stage(props) {
   };
 
   if(showEditForm) {
-    return <div className="stage-box">
+    return <div className="stage-box spacing-below">
       <div className="stage-header-elements">{editStageForm}</div>
       <h5 className="cursor stage-button blue" onClick={() => setShowEditForm(false)}>Close</h5>
       {renderIssues()}
     </div>
   }
 
-  return <div className="stage-box">
+  return <div className="stage-box spacing-below">
     <h3 className="stage-header-elements">{props.stage.name}</h3>
     {handleButtons()}
     {renderIssues()}
