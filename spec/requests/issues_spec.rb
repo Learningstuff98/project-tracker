@@ -37,6 +37,14 @@ RSpec.describe "Issues", type: :request do
         expect(response).to be_successful
       end
     end
+
+    describe "DELETE #destroy" do
+      it "should let users delete issues" do
+        issue = FactoryBot.create(:issue)
+        delete project_issue_path(@project, issue)
+        expect(Issue.all.count).to eq 0
+      end
+    end
   end
 
   context "while logged in as a foreign user" do
@@ -73,6 +81,15 @@ RSpec.describe "Issues", type: :request do
         issue = FactoryBot.create(:issue)
         get issue_path(issue)
         expect(response).to be_successful
+      end
+    end
+
+    describe "DELETE #destroy" do
+      it "should be unauthorized" do
+        issue = FactoryBot.create(:issue)
+        delete project_issue_path(@project, issue)
+        expect(response).to have_http_status(:unauthorized)
+        expect(Issue.all.count).to eq 1
       end
     end
   end

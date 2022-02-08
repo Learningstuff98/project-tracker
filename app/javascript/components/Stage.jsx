@@ -36,6 +36,8 @@ function Stage(props) {
     return <Issue
       issue={issue}
       root_url={props.root_url}
+      isProjectOwner={props.isProjectOwner}
+      project={props.project}
     />
   };
 

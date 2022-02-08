@@ -1,6 +1,7 @@
 class IssuesController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: %i[destroy]
   before_action :authenticate_user!
-  before_action :require_authorized, only: %i[new create]
+  before_action :require_authorized, only: %i[new create destroy]
 
   def new
     @project = current_project
@@ -22,6 +23,12 @@ class IssuesController < ApplicationController
 
   def show
     @issue = current_issue
+  end
+
+  def destroy
+    @project = current_project
+    @issue = current_issue
+    SendIssuesJob.perform_later(@project) if @issue.destroy
   end
 
   private
