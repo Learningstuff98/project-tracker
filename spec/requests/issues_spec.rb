@@ -45,6 +45,32 @@ RSpec.describe "Issues", type: :request do
         expect(Issue.all.count).to eq 0
       end
     end
+
+    describe "GET #edit" do
+      it "should load the page" do
+        issue = FactoryBot.create(:issue)
+        get edit_project_issue_path(@project, issue)
+        expect(response).to be_successful
+      end
+    end
+
+    describe "PATCH #update" do
+      it "should let users update issues" do
+        issue = FactoryBot.create(:issue)
+        patch project_issue_path(
+          {
+            project_id: @project.id,
+            id: issue.id,
+            issue: {
+              title: "new title"
+            }
+          }
+        )
+        expect(response).to be_redirect
+        issue.reload
+        expect(issue.title).to eq "new title"
+      end
+    end
   end
 
   context "while logged in as a foreign user" do
@@ -90,6 +116,32 @@ RSpec.describe "Issues", type: :request do
         delete project_issue_path(@project, issue)
         expect(response).to have_http_status(:unauthorized)
         expect(Issue.all.count).to eq 1
+      end
+    end
+
+    describe "GET #edit" do
+      it "should be unauthorized" do
+        issue = FactoryBot.create(:issue)
+        get edit_project_issue_path(@project, issue)
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    describe "PATCH #update" do
+      it "should be unauthorized" do
+        issue = FactoryBot.create(:issue)
+        patch project_issue_path(
+          {
+            project_id: @project.id,
+            id: issue.id,
+            issue: {
+              title: "new title"
+            }
+          }
+        )
+        expect(response).to have_http_status(:unauthorized)
+        issue.reload
+        expect(issue.title).to eq "issue title"
       end
     end
   end

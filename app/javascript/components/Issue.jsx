@@ -10,10 +10,15 @@ function Issue(props) {
     }
   };
 
-  const handleDeleteButton = () => {
+  const handleButtons = () => {
     if(props.isProjectOwner) {
-      return <div onClick={() => deleteIssue()} className="red cursor issue-button">
-        Delete
+      return <div>
+        <div onClick={() => deleteIssue()} className="red cursor issue-button">
+          Delete
+        </div>
+        <a href={`${props.root_url}/projects/${props.project.id}/issues/${props.issue.id}/edit`}>
+          Edit
+        </a>
       </div>
     }
   };
@@ -23,7 +28,7 @@ function Issue(props) {
     <a className="green" href={`${props.root_url}/issues/${props.issue.id}`}>
       See Details
     </a>
-    {handleDeleteButton()}
+    {handleButtons()}
   </div>
 }
 
