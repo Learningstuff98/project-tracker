@@ -71,6 +71,22 @@ RSpec.describe "Issues", type: :request do
         expect(issue.title).to eq "new title"
       end
     end
+
+    describe "PATCH #move_issue" do
+      it "should let users move issues" do
+        issue = FactoryBot.create(:issue)
+        patch project_issue_move_issue_path(
+          {
+            project_id: @project.id,
+            id: issue.id,
+            issue: {
+              stage_id: 25
+            }
+          }
+        )
+        expect(response).to be_successful
+      end
+    end
   end
 
   context "while logged in as a foreign user" do
@@ -142,6 +158,22 @@ RSpec.describe "Issues", type: :request do
         expect(response).to have_http_status(:unauthorized)
         issue.reload
         expect(issue.title).to eq "issue title"
+      end
+    end
+
+    describe "PATCH #move_issue" do
+      it "should let users move issues" do
+        issue = FactoryBot.create(:issue)
+        patch project_issue_move_issue_path(
+          {
+            project_id: @project.id,
+            id: issue.id,
+            issue: {
+              stage_id: 25
+            }
+          }
+        )
+        expect(response).to be_successful
       end
     end
   end

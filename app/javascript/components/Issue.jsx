@@ -23,7 +23,14 @@ function Issue(props) {
     }
   };
 
-  return <div className="issue-box">
+  const handleColor = () => {
+    if(props.selectedIssue && props.issue.id === props.selectedIssue.id) {
+      return 'green-outline';
+    }
+    return 'grey-outline';
+  };
+
+  return <div className={`issue-box ${handleColor()}`} onClick={() => props.setSelectedIssue(props.issue)}>
     <h5>{props.issue.title}</h5>
     <a className="green" href={`${props.root_url}/issues/${props.issue.id}`}>
       See Details

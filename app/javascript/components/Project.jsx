@@ -5,6 +5,7 @@ import Stages from './Stages';
 function Project(props) {
   const [stages, setStages] = useState(props.stages);
   const [issues, setIssues] = useState(props.issues);
+  const [selectedIssue, setSelectedIssue] = useState(null);
 
   useEffect(() => {
     handleWebsocketUpdates();
@@ -35,6 +36,8 @@ function Project(props) {
     project={props.project}
     issues={issues}
     isProjectOwner={isProjectOwner()}
+    setSelectedIssue={setSelectedIssue}
+    selectedIssue={selectedIssue}
   />
 
   return <div>

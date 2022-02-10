@@ -38,6 +38,8 @@ function Stage(props) {
       root_url={props.root_url}
       isProjectOwner={props.isProjectOwner}
       project={props.project}
+      setSelectedIssue={props.setSelectedIssue}
+      selectedIssue={props.selectedIssue}
     />
   };
 
@@ -53,15 +55,23 @@ function Stage(props) {
     });
   };
 
+  const moveIssue = () => {
+    if(props.selectedIssue) {
+      axios.patch(`${props.root_url}/projects/${props.project.id}/issues/${props.selectedIssue.id}/move_issue`, { stage_id: props.stage.id })
+      .then(() => props.setSelectedIssue(null))
+      .catch((err) => console.log(err.response.data));
+    }
+  };
+
   if(showEditForm) {
-    return <div className="stage-box spacing-below">
+    return <div className="stage-box spacing-below" onClick={() => moveIssue()}>
       <div className="stage-header-elements">{editStageForm}</div>
       <h5 className="cursor stage-button blue" onClick={() => setShowEditForm(false)}>Close</h5>
       {renderIssues()}
     </div>
   }
 
-  return <div className="stage-box spacing-below">
+  return <div className="stage-box spacing-below" onClick={() => moveIssue()}>
     <h3 className="stage-header-elements">{props.stage.name}</h3>
     {handleButtons()}
     {renderIssues()}

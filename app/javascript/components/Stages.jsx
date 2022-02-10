@@ -11,6 +11,8 @@ function Stages(props) {
       project={props.project}
       isProjectOwner={props.isProjectOwner}
       issues={props.issues}
+      setSelectedIssue={props.setSelectedIssue}
+      selectedIssue={props.selectedIssue}
     /> 
   };
 

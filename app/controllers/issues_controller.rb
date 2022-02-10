@@ -1,5 +1,5 @@
 class IssuesController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: %i[destroy]
+  skip_before_action :verify_authenticity_token, only: %i[destroy move_issue]
   before_action :authenticate_user!
   before_action :require_authorized, only: %i[new create destroy edit update]
 
@@ -47,6 +47,12 @@ class IssuesController < ApplicationController
     end
   end
 
+  def move_issue
+    @project = current_project
+    @issue = current_issue
+    SendIssuesJob.perform_later(@project) if @issue.update(issue_params)
+  end
+
   private
 
   def current_issue
@@ -62,6 +68,6 @@ class IssuesController < ApplicationController
   end
 
   def issue_params
-    params.require(:issue).permit(:title, :description)
+    params.require(:issue).permit(:title, :description, :stage_id)
   end
 end
