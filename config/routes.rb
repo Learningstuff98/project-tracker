@@ -4,10 +4,9 @@ Rails.application.routes.draw do
   root 'pages#home'
   patch 'projects/:project_id/issues/:id/move_issue', to: 'issues#move_issue', as: 'project_issue_move_issue'
   resources :projects do
-    resources :issues, only: [:destroy, :edit, :update]
+    resources :issues, only: [:destroy, :edit, :update, :show]
     resources :stages do
       resources :issues, only: [:new, :create]
     end
   end
-  resources :issues, only: [:show]
 end

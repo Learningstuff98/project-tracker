@@ -22,6 +22,7 @@ class IssuesController < ApplicationController
   end
 
   def show
+    @project = current_project
     @issue = current_issue
   end
 

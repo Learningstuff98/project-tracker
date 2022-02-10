@@ -33,7 +33,7 @@ RSpec.describe "Issues", type: :request do
     describe "GET #show" do
       it "should load the page" do
         issue = FactoryBot.create(:issue)
-        get issue_path(issue)
+        get project_issue_path(@project, issue)
         expect(response).to be_successful
       end
     end
@@ -121,7 +121,7 @@ RSpec.describe "Issues", type: :request do
     describe "GET #show" do
       it "should load the page" do
         issue = FactoryBot.create(:issue)
-        get issue_path(issue)
+        get project_issue_path(@project, issue)
         expect(response).to be_successful
       end
     end
