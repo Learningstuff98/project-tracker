@@ -24,6 +24,7 @@ class IssuesController < ApplicationController
   def show
     @project = current_project
     @issue = current_issue
+    @assignees = @issue.assignees
   end
 
   def destroy

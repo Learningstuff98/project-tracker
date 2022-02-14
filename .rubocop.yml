@@ -13,6 +13,7 @@ AllCops:
     - 'app/helpers/**/*'
     - 'app/controllers/application_controller.rb'
     - 'app/models/user.rb'
+    - 'spec/factories.rb'
 
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'context']

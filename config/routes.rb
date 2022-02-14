@@ -9,4 +9,8 @@ Rails.application.routes.draw do
       resources :issues, only: [:new, :create]
     end
   end
+  resources :issues, only: [] do
+    resources :assignees, only: [:create, :index]
+  end
+  resources :assignees, only: [:destroy]
 end

@@ -4,5 +4,13 @@
     <hr>
     <%= @issue.description %>
   </h4>
-  <h4><%= link_to "Go to project board", project_path(@project), class: "green" %></h4>
+  <h4 class="spacing-below"><%= link_to "Go to project board", project_path(@project), class: "green" %></h4>
+  <h4 class="spacing-below"><%= link_to "Homepage", root_path, class: "green" %></h4>
+  <%= react_component("Assignees", {
+    root_url: root_url,
+    issue: @issue,
+    current_user: current_user,
+    assignees: @assignees,
+    project: @project
+  }) %>
 </div>

@@ -25,4 +25,9 @@ FactoryBot.define do
     description { "issue description" }
     association :stage
   end
+
+  factory :assignee do
+    assignee_username { "assignee username" }
+    association :issue
+  end
 end
