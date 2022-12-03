@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://:p178522aa270d53b8cca6bd126efccf0f6e2efa1d9a5b705b3be6248635bb9be7@ec2-54-163-243-115.compute-1.amazonaws.com:10429
+  url: ENV[“REDIS_URL”]
   channel_prefix: projecttracker_production
