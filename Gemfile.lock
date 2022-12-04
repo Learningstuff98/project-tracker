@@ -93,6 +93,10 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.4.4)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.10.0)
     execjs (2.8.1)
     factory_bot (6.2.0)
@@ -296,6 +300,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
+  dotenv-rails
   factory_bot_rails
   jbuilder (~> 2.7)
   kaminari
